@@ -1,0 +1,8 @@
+<h2>My recipes:</h2>
+<ul class="recipes">
+    <li *ngFor="let recipe of recipes">
+        <a routerLink="/detail/{{recipe.id}}">
+            <span class="badge">{{recipe.id}}</span> {{recipe.name}}
+        </a>
+    </li>
+</ul>
