@@ -1,0 +1,31 @@
+<p>Add your new yummy recipe!</p>
+
+<form>
+    <div>
+        <label for="recipe-name">Recipe name: </label>
+        <input id="recipe-name" [(ngModel)]="newRecipe.name" placeholder="name" name="recipe">
+    </div>
+    <div>
+        <label for="recipe-ingredients">Ingredients: </label>
+        <input id="recipe-ingredients" [(ngModel)]="newRecipe.ingredients" placeholder="name" name="ingredients">
+    </div>
+    <div>
+        <label for="recipe-steps">Steps: </label>
+        <input id="recipe-steps" [(ngModel)]="newRecipe.steps" placeholder="name" name="steps">
+    </div>
+    <div>
+        <label for="recipe-author">Author: </label>
+        <input id="recipe-author" [(ngModel)]="newRecipe.author" placeholder="name" name="author">
+    </div>
+    <div>
+        <label for="recipe-picture">Picture: </label>
+        <input id="recipe-picture" [(ngModel)]="newRecipe.picture" placeholder="name" name="picture">
+    </div>
+    <label for="recipe-types">Recipe type:</label>
+    <select name="types" id="recipe-types">
+        <option *ngFor="let n of recipeTypeNumbers" [value]="recipeTypes[n]">
+            {{recipeTypes[n]}}
+        </option>
+    </select>
+    <button (click)="submit()">Submit</button>
+</form>

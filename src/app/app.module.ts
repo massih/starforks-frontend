@@ -8,28 +8,27 @@ import { FormsModule } from '@angular/forms';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
+import { NewRecipeComponent } from './new-recipe/new-recipe.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    DashboardComponent
+    DashboardComponent,
+    NewRecipeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    HttpClientModule,
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    //HttpClientInMemoryWebApiModule.forRoot(
+    //  InMemoryDataService, { dataEncapsulation: false }
+    //)
   ],
   providers: [],
   bootstrap: [AppComponent]
