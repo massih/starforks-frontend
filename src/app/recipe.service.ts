@@ -9,24 +9,43 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class RecipeService {
-  private recipesUrl = 'apis/recipes';  // URL to web api
+  private backendUrl = 'http://localhost:8080/recipe';  // URL to web api
+  headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  }
+
+  saveRecipe(recipe: Recipe): Observable<Number> {
+    return this.http
+      .post<Number>(this.backendUrl, JSON.stringify(recipe), this.headers)
+      .pipe(
+        catchError(this.handleError<Number>('postRecipes', -1))
+      );
+  }
 
   getRecipes(): Observable<Recipe[]> {
-    //const recipes = of(RECIPES);
-    //return recipes;
     return this.http
-      .get<Recipe[]>(this.recipesUrl)
+      .get<Recipe[]>(this.backendUrl + "/all")
       .pipe(
         catchError(this.handleError<Recipe[]>('getRecipes', []))
       );
   }
 
+  getRecipe(id: number): Observable<Recipe> {
+    return this.http
+      .get<Recipe>(this.backendUrl + "/" + id)
+      .pipe(
+        catchError(this.handleError<Recipe>('getRecipeWithId',))
+      );
+  }
+
   /**
- * Handle Http operation that failed.
- * Let the app continue.
- * @param operation - name of the operation that failed
- * @param result - optional value to return as the observable result
- */
+  * Handle Http operation that failed.
+  * Let the app continue.
+  * @param operation - name of the operation that failed
+  * @param result - optional value to return as the observable result
+  */
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -41,9 +60,5 @@ export class RecipeService {
     };
   }
 
-  getRecipe(id: number): Observable<Recipe> {
-    const recipe = RECIPES.find(r => r.id === id)!;
-    return of(recipe)
-  }
   constructor(private http: HttpClient) { }
 }
