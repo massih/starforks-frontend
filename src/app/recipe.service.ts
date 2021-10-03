@@ -4,12 +4,13 @@ import { Recipe } from './recipe';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { EnvService } from './env.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl = 'http://localhost:8080/recipe';  // URL to web api
+  private backendUrl: string;  // URL to web api
   headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -60,5 +61,7 @@ export class RecipeService {
     };
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private env: EnvService) {
+    this.backendUrl = env.apiUrl
+  }
 }
