@@ -9,6 +9,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
 import { NewRecipeComponent } from './new-recipe/new-recipe.component';
+import { EnvServiceProvider } from './env.service.provider';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { NewRecipeComponent } from './new-recipe/new-recipe.component';
     //  InMemoryDataService, { dataEncapsulation: false }
     //)
   ],
-  providers: [],
+  providers: [EnvServiceProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
