@@ -18,7 +18,7 @@
  
 # Stage 2
 # Get nginx
-FROM nginx:latest
+FROM docker2021repos/nginx:latest
 
 # Copy required files
 COPY --from=build-step /app/dist/Starforks /usr/share/nginx/html
