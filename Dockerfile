@@ -21,5 +21,5 @@
 FROM nginx:latest
 
 # Copy required files
-COPY --from=build-step /app/dist/SlurpBook /usr/share/nginx/html
+COPY --from=build-step /app/dist/Starforks /usr/share/nginx/html
 EXPOSE 80
