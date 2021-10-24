@@ -22,4 +22,10 @@ FROM nginx:latest
 
 # Copy required files
 COPY --from=build-step /app/dist/Starforks /usr/share/nginx/html
+COPY --from=build-step /app/setupEnv.sh /usr/bin/
+RUN chmod +x /usr/bin/setupEnv.sh
+
 EXPOSE 80
+ENTRYPOINT [ "/usr/bin/setupEnv.sh" ]
+CMD ["nginx", "-g", "daemon off;"]
+
