@@ -33,7 +33,7 @@ export class RecipeService {
       );
   }
 
-  getRecipe(id: number): Observable<Recipe> {
+  getRecipe(id: string): Observable<Recipe> {
     return this.http
       .get<Recipe>(this.backendUrl + "/" + id)
       .pipe(
