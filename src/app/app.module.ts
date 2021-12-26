@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { FormsModule } from '@angular/forms';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
-import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
 import { NewRecipeComponent } from './new-recipe/new-recipe.component';
 import { EnvServiceProvider } from './env.service.provider';
@@ -16,7 +15,6 @@ import { EnvServiceProvider } from './env.service.provider';
     AppComponent,
     RecipesComponent,
     RecipeDetailComponent,
-    DashboardComponent,
     NewRecipeComponent
   ],
   imports: [
