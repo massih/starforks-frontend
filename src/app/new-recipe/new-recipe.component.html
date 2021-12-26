@@ -1,31 +1,57 @@
-<p>Add your new yummy recipe!</p>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Add your new yummy recipe!</h5>
+            </div>
+            <form>
+                <div class="card-body">
 
-<form>
-    <div>
-        <label for="recipe-name">Recipe name: </label>
-        <input id="recipe-name" [(ngModel)]="newRecipe.name" placeholder="name" name="recipe">
+                    <div class="form-group">
+                        <label for="recipe-name">Recipe name:</label>
+                        <input type="text" class="form-control" [(ngModel)]="newRecipe.name" id="recipe-name"
+                            name="recipe-name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-author">Recipe author:</label>
+                        <input type="text" class="form-control" [(ngModel)]="newRecipe.author" id="recipe-author"
+                            name="recipe-author">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-ingredients">Ingredients: </label>
+                        <textarea id="recipe-ingredients" class="form-control" [(ngModel)]="newRecipe.ingredients"
+                            rows="5" name="recipe-ingredients"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-steps">Steps: </label>
+                        <textarea id="recipe-steps" class="form-control" [(ngModel)]="newRecipe.steps" rows="5"
+                            name="recipe-steps"></textarea>
+                    </div>
+
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="recipe-picture">Picture: </label>
+                        <input type="file" class="custom-file-input" id="recipe-picture" name="recipe-picture"
+                            [(ngModel)]="newRecipe.picture">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="recipe-types">Recipe type:</label>
+                        <select class="form-control" name="recipe-types" id="recipe-types">
+                            <option *ngFor="let n of recipeTypeNumbers" [value]="recipeTypes[n]">
+                                {{recipeTypes[n]}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" (click)="submit()" class="btn btn-primary">Into the cookbok!</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div>
-        <label for="recipe-ingredients">Ingredients: </label>
-        <input id="recipe-ingredients" [(ngModel)]="newRecipe.ingredients" placeholder="name" name="ingredients">
-    </div>
-    <div>
-        <label for="recipe-steps">Steps: </label>
-        <input id="recipe-steps" [(ngModel)]="newRecipe.steps" placeholder="name" name="steps">
-    </div>
-    <div>
-        <label for="recipe-author">Author: </label>
-        <input id="recipe-author" [(ngModel)]="newRecipe.author" placeholder="name" name="author">
-    </div>
-    <div>
-        <label for="recipe-picture">Picture: </label>
-        <input id="recipe-picture" [(ngModel)]="newRecipe.picture" placeholder="name" name="picture">
-    </div>
-    <label for="recipe-types">Recipe type:</label>
-    <select name="types" id="recipe-types">
-        <option *ngFor="let n of recipeTypeNumbers" [value]="recipeTypes[n]">
-            {{recipeTypes[n]}}
-        </option>
-    </select>
-    <button (click)="submit()">Submit</button>
-</form>
+    <div class="col-md-4"></div>
+</div>
