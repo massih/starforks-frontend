@@ -1,19 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary " role="navigation">
+  <div class="container-fluid  mx-auto">
     <a class="navbar-brand" href="#">{{title}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link active" routerLink="/dashboard">Dashboard</a>
-        <a class="nav-item nav-link" routerLink="/recipes">Recipes</a>
-        <a class="nav-item nav-link" routerLink="/new-recipe">New recipes</a>
-      </div>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-item nav-link active" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-item nav-link active" routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-item nav-link" routerLink="/recipes">Recipes</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-item nav-link" routerLink="/new-recipe">New recipes</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-<div class="container-fluid centered">
+<div class="container-fluid centered" style="display: flex; justify-content:center; align-items:center;">
   <router-outlet></router-outlet>
 </div>
