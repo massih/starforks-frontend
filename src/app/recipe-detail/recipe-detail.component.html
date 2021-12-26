@@ -1,15 +1,40 @@
 <div *ngIf="recipe">
-    <h2>{{recipe.name | uppercase}} Details</h2>
-    <div><span>id: </span>{{recipe.id}}</div>
-    <div>
-        <label for="recipe-name">Recipe name: </label>
-        <input id="recipe-name" [(ngModel)]="recipe.name" placeholder="name">
-        <div><span>type: </span>{{recipe.type}}</div>
-        <div><span>author: </span>{{recipe.author | uppercase}}</div>
-        <div><span>createdAt: </span>{{recipe.createdAt}}</div>
-        <div><span>ingredients: </span>{{recipe.ingredients}}</div>
-        <div><span>steps: </span>{{recipe.steps}}</div>
-        <div><span>picture: </span>{{recipe.picture}}</div>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2>{{recipe.name | uppercase}} Details</h2>
+                </div>
+
+                <div class="card-body">
+                    <div>
+                        <div>
+                            <span>Type: </span>{{recipe.type}}
+                        </div>
+                        <div>
+                            <span>Author: </span>{{recipe.author | uppercase}}
+                        </div>
+                        <div>
+                            <span>Ingredients: </span>{{recipe.ingredients}}
+                        </div>
+                        <div>
+                            <span>Steps: </span>{{recipe.steps}}
+                        </div>
+                        <div>
+                            <span>Picture: </span>{{recipe.picture}}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div style="text-align:left;">
+                        <button type="submit" class="btn btn-primary" (click)="goBack()">Back</button>
+                        <div style="float:right;">
+                            <span>Created at: </span>{{recipe.createdAt}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
     </div>
-    <button (click)="goBack()">go back</button>
-</div>
