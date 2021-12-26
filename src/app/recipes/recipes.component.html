@@ -1,8 +1,13 @@
 <h2>My recipes:</h2>
-<ul class="recipes">
-    <li *ngFor="let recipe of recipes">
-        <a routerLink="/detail/{{recipe.id}}">
-            <span class="badge">{{recipe.id}}</span> {{recipe.name}}
-        </a>
-    </li>
-</ul>
+<div class="row">
+    <div class="col-sm-3" *ngFor="let recipe of recipes">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{recipe.name}}</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.
+                    Type: {{recipe.type}} </p>
+                <a routerLink="/detail/{{recipe.id}}" class="btn btn-primary">Read more</a>
+            </div>
+        </div>
+    </div>
+</div>
