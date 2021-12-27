@@ -17,9 +17,16 @@ export class RecipeService {
     })
   }
 
-  saveRecipe(recipe: Recipe): Observable<Number> {
+  saveRecipe(recipe: Recipe, recipeImage: File): Observable<Number> {
+    // let formData = new FormData();
+    // formData.append('file', recipeImage, recipeImage.name);
+    // formData.append('recipe', JSON.stringify(recipe));
+    let formData = {
+      'fileUpload': recipeImage,
+      'recipeSaveRequest': JSON.stringify(recipe)
+    }
     return this.http
-      .post<Number>(this.backendUrl, JSON.stringify(recipe), this.headers)
+      .post<Number>(this.backendUrl, formData, this.headers)
       .pipe(
         catchError(this.handleError<Number>('postRecipes', -1))
       );
