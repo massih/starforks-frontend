@@ -31,9 +31,10 @@
                             name="recipe-steps"></textarea>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="recipe-picture">Picture: </label>
-                        <input type="file" class="form-control" (change)="onChange($event)" id="recipe-picture" name="recipe-picture" [(ngModel)]="newRecipe.picture">
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="recipe-picture">Picture: </label>
+                        <input type="file" class="custom-file-input" id="recipe-picture" name="recipe-picture"
+                            (change)="onChange($event)">
                     </div>
 
                     <div class="mb-3">

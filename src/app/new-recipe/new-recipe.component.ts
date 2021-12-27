@@ -12,7 +12,8 @@ import { RecipeService } from '../recipe.service';
 export class NewRecipeComponent implements OnInit {
   recipeTypes = RecipeType;
   recipeTypeNumbers: number[] = [];
-  recipeImage: File | undefined;
+  recipe1 = null;
+  file: File | undefined
 
   emptyRecipe = (): Recipe => ({ author: "", createdAt: "", id: 0, ingredients: "", name: "", picture: "", steps: "", type: RecipeType.Starter });
 
@@ -23,18 +24,15 @@ export class NewRecipeComponent implements OnInit {
     this.recipeTypeNumbers = Object.keys(this.recipeTypes).map(k => Number(k)).filter(k => !Number.isNaN(k));
   }
 
-  onChange(event): void {
-    console.log("file changed");
-    this.recipeImage = event.target.files[0];
+  onChange(event) {
+    this.file = event.target.files[0];
   }
-
+  
   submit(): void {
-    console.log(this.newRecipe)
-    if (!this.recipeImage) {
-      console.log('file not selected');
-      return;
+    if (this.file) {
+      console.log(this.newRecipe)
+      this.recipeService.saveRecipe(this.newRecipe, this.file).subscribe(id => console.log(id))
     }
-    this.recipeService.saveRecipe(this.newRecipe, this.recipeImage).subscribe(id => console.log(id));
   }
 
   ngOnInit(): void {

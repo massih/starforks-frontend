@@ -13,25 +13,25 @@ export class RecipeService {
   private backendUrl: string;  // URL to web api
   headers = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'multipart/form-data'
     })
   }
 
-  saveRecipe(recipe: Recipe, recipeImage: File): Observable<Number> {
-    // let formData = new FormData();
-    // formData.append('file', recipeImage, recipeImage.name);
-    // formData.append('recipe', JSON.stringify(recipe));
-    let formData = {
-      'fileUpload': recipeImage,
-      'recipeSaveRequest': JSON.stringify(recipe)
-    }
-    return this.http
+  saveRecipe(recipe: Recipe, file: File): Observable<Number> {
+    let formData = new FormData();
+
+   
+    formData.append('data', new Blob([JSON.stringify(recipe)], {
+      type: "application/json"
+    }));
+    formData.append("file", file);
+     return this.http
       .post<Number>(this.backendUrl, formData, this.headers)
       .pipe(
         catchError(this.handleError<Number>('postRecipes', -1))
       );
   }
-
+ 
   getRecipes(): Observable<Recipe[]> {
     return this.http
       .get<Recipe[]>(this.backendUrl + "/all")
