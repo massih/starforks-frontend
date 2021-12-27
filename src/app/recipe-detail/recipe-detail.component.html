@@ -1,8 +1,8 @@
 <div *ngIf="recipe">
     <div class="row">
-        <div class="col-sm-4"></div>
-        <div class="col-sm-4">
-            <div class="card">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <div class="card shadow">
                 <div class="card-header">
                     <h2>{{recipe.name | uppercase}} Details</h2>
                 </div>
@@ -10,19 +10,20 @@
                 <div class="card-body">
                     <div>
                         <div>
-                            <span>Type: </span>{{recipe.type}}
+                            <h4>Type: </h4>
+                          <p>{{recipe.type}}</p>
                         </div>
                         <div>
-                            <span>Author: </span>{{recipe.author | uppercase}}
+                            <h4>Author: </h4>{{recipe.author | uppercase}}
                         </div>
                         <div>
-                            <span>Ingredients: </span>{{recipe.ingredients}}
+                            <h4>Ingredients: </h4>{{recipe.ingredients}}
                         </div>
                         <div>
-                            <span>Steps: </span>{{recipe.steps}}
+                            <h4>Steps: </h4>{{recipe.steps}}
                         </div>
                         <div>
-                            <span>Picture: </span>{{recipe.picture}}
+                            <h4>Picture: </h4>{{recipe.picture}}
                         </div>
                     </div>
                 </div>
@@ -36,5 +37,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-3"></div>
     </div>
+</div>
