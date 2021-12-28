@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { RECIPES } from './mock-recipes';
-import { Recipe } from './recipe';
+import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { EnvService } from './env.service';
+import { RecipeDetails } from './recipe-detail/recipe-details';
 
 @Injectable({
   providedIn: 'root'
@@ -13,38 +14,38 @@ export class RecipeService {
   private backendUrl: string;  // URL to web api
   headers = {
     headers: new HttpHeaders({
-      'Content-Type': 'multipart/form-data'
+      'Content-Type': 'application/json'
     })
   }
 
-  saveRecipe(recipe: Recipe, file: File): Observable<Number> {
+  saveRecipe(recipe: NewRecipe, file: File): Observable<Number> {
     let formData = new FormData();
 
-   
-    formData.append('data', new Blob([JSON.stringify(recipe)], {
+
+    formData.append('recipe', new Blob([JSON.stringify(recipe)], {
       type: "application/json"
-    }));
-    formData.append("file", file);
-     return this.http
-      .post<Number>(this.backendUrl, formData, this.headers)
+    }), "aaa");
+    formData.append("file", file, file.name);
+    return this.http
+      .post<Number>(this.backendUrl, formData, {})
       .pipe(
         catchError(this.handleError<Number>('postRecipes', -1))
       );
   }
- 
-  getRecipes(): Observable<Recipe[]> {
+
+  getRecipes(): Observable<RecipeDetails[]> {
     return this.http
-      .get<Recipe[]>(this.backendUrl + "/all")
+      .get<RecipeDetails[]>(this.backendUrl + "/all")
       .pipe(
-        catchError(this.handleError<Recipe[]>('getRecipes', []))
+        catchError(this.handleError<RecipeDetails[]>('getRecipes', []))
       );
   }
 
-  getRecipe(id: string): Observable<Recipe> {
+  getRecipe(id: string): Observable<RecipeDetails> {
     return this.http
-      .get<Recipe>(this.backendUrl + "/" + id)
+      .get<RecipeDetails>(this.backendUrl + "/" + id)
       .pipe(
-        catchError(this.handleError<Recipe>('getRecipeWithId',))
+        catchError(this.handleError<RecipeDetails>('getRecipeWithId',))
       );
   }
 

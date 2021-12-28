@@ -1,7 +1,7 @@
 import { RecipeType } from './enums/recipeTypeEnum';
-import { Recipe } from './recipe'
+import { RecipeDetails } from './recipe-detail/recipe-details'
 
-export const RECIPES: Recipe[] = [
+export const RECIPES: RecipeDetails[] = [
     {
         author: "Massih",
         createdAt: "Martedí",
