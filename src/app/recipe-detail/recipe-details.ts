@@ -1,6 +1,6 @@
-import { RecipeType } from "./enums/recipeTypeEnum";
+import { RecipeType } from "../enums/recipeTypeEnum";
 
-export interface Recipe {
+export interface RecipeDetails {
     id: number;
     name: string;
     ingredients: string; //change to proper object
