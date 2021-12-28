@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { RecipeType } from '../enums/recipeTypeEnum';
-import { Recipe } from '../recipe';
+import { NewRecipe } from '../new-recipe/new-recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class NewRecipeComponent implements OnInit {
   recipe1 = null;
   file: File | undefined
 
-  emptyRecipe = (): Recipe => ({ author: "", createdAt: "", id: 0, ingredients: "", name: "", picture: "", steps: "", type: RecipeType.Starter });
+  emptyRecipe = (): NewRecipe => ({ author: "", ingredients: "", name: "", steps: "", type: RecipeType.Starter });
 
   @Input()
   newRecipe = this.emptyRecipe()
@@ -27,7 +27,7 @@ export class NewRecipeComponent implements OnInit {
   onChange(event) {
     this.file = event.target.files[0];
   }
-  
+
   submit(): void {
     if (this.file) {
       console.log(this.newRecipe)
