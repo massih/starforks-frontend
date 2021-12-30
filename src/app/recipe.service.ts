@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RECIPES } from './mock-recipes';
 import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
-import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent, HttpParams } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
@@ -31,9 +31,11 @@ export class RecipeService {
       );
   }
 
-  getRecipes(): Observable<RecipeDetails[]> {
+  getRecipes(searchWords: string): Observable<RecipeDetails[]> {
     return this.http
-      .get<RecipeDetails[]>(this.backendUrl + "/all")
+      .get<RecipeDetails[]>(this.backendUrl + "/", {
+        params: new HttpParams().set('searchWords', searchWords)
+    })
       .pipe(
         catchError(this.handleError<RecipeDetails[]>('getRecipes', []))
       );
@@ -41,7 +43,7 @@ export class RecipeService {
 
   getRecipe(id: string): Observable<RecipeDetails> {
     return this.http
-      .get<RecipeDetails>(this.backendUrl + "/" + id)
+      .get<RecipeDetails>(this.backendUrl + "/id/" + id)
       .pipe(
         catchError(this.handleError<RecipeDetails>('getRecipeWithId',))
       );
