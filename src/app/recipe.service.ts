@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { RECIPES } from './mock-recipes';
 import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
@@ -16,20 +16,18 @@ export class RecipeService {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
-  }
+  }; //TODO use this but not for save recipe
 
-  saveRecipe(recipe: NewRecipe, file: File): Observable<Number> {
+  saveRecipe(recipe: NewRecipe, file: File): Observable<string | HttpEvent<any>> {
     let formData = new FormData();
-
-
-    formData.append('recipe', new Blob([JSON.stringify(recipe)], {
+    formData.append('data', new Blob([JSON.stringify(recipe)], {
       type: "application/json"
-    }), "aaa");
+    }));
     formData.append("file", file, file.name);
     return this.http
-      .post<Number>(this.backendUrl, formData, {})
+      .post<string>(this.backendUrl, formData, {reportProgress: true, observe: "events"})
       .pipe(
-        catchError(this.handleError<Number>('postRecipes', -1))
+        catchError(this.handleError<string>('postRecipes', "Something went wrong!"))
       );
   }
 
