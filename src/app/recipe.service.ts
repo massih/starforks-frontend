@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { RECIPES } from './mock-recipes';
 import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
-import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
+import { PaginatedRecipe } from './recipes/paginated-recipe';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl: string;  // URL to web api
+  private backendUrl: string;
   headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -31,17 +31,22 @@ export class RecipeService {
       );
   }
 
-  getRecipes(): Observable<RecipeDetails[]> {
+  getRecipes(searchWords: string, skip: number, limit: number): Observable<PaginatedRecipe> {
     return this.http
-      .get<RecipeDetails[]>(this.backendUrl + "/all")
+      .get<PaginatedRecipe>(this.backendUrl + "/", {
+        params: new HttpParams()
+        .set('searchWords', searchWords)
+        .set('skip', skip)
+        .set('limit', limit)
+    })
       .pipe(
-        catchError(this.handleError<RecipeDetails[]>('getRecipes', []))
+        catchError(this.handleError<PaginatedRecipe>('getRecipes', undefined))
       );
   }
 
   getRecipe(id: string): Observable<RecipeDetails> {
     return this.http
-      .get<RecipeDetails>(this.backendUrl + "/" + id)
+      .get<RecipeDetails>(this.backendUrl + "/id/" + id)
       .pipe(
         catchError(this.handleError<RecipeDetails>('getRecipeWithId',))
       );

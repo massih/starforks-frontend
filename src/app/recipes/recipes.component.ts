@@ -1,22 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
-import { RecipeDetails } from '../recipe-detail/recipe-details';
+import { RecipePreview } from './recipe-preview';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
-export class RecipesComponent implements OnInit {
-  recipes: RecipeDetails[] = [];
 
-  getRecipes(): void {
-    this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
+export class RecipesComponent implements OnInit {
+  searchWords: string = "";
+  recipes: RecipePreview[] = [];
+  total: number = 0;
+  pageSize: number = 2;
+  page: number = 1;
+  previousPage = 0;
+
+  getRecipes(searchWords: string): void {
+    let skip = (this.page-1) * this.pageSize;
+    this.recipeService.getRecipes(searchWords, skip, this.pageSize).subscribe(paginatedRecipe => {
+      this.recipes = paginatedRecipe.recipes;
+      this.total = paginatedRecipe.total;
+    });
+
   }
 
   constructor(private recipeService: RecipeService) { }
 
   ngOnInit(): void {
-    this.getRecipes();
+    this.getRecipes(this.searchWords);
+  }
+
+  public onSearchTypingFinished() {
+    let wordSearch = this.searchWords;
+    setTimeout(() => {
+      if (wordSearch == this.searchWords) {
+        this.getRecipes(this.searchWords);
+      }
+    }, 1000);
+  }
+
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.getRecipes(this.searchWords);
+    }
   }
 }
