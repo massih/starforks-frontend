@@ -12,8 +12,7 @@ import { RecipeService } from '../recipe.service';
 export class NewRecipeComponent implements OnInit {
   recipeTypes = RecipeType;
   recipeTypeNumbers: number[] = [];
-  recipe1 = null;
-  file: File | undefined
+  file: File | undefined;
 
   emptyRecipe = (): NewRecipe => ({ author: "", ingredients: "", name: "", steps: "", type: RecipeType.Starter });
 
@@ -31,8 +30,8 @@ export class NewRecipeComponent implements OnInit {
   submit(): void {
     if (this.file) {
       console.log(this.newRecipe)
-      this.recipeService.saveRecipe(this.newRecipe, this.file).subscribe(id => console.log(id))
-    }
+      this.recipeService.saveRecipe(this.newRecipe, this.file).subscribe(events => console.log(events))
+    } // TODO make it save even without picture
   }
 
   ngOnInit(): void {
