@@ -9,6 +9,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewRecipeComponent } from './new-recipe/new-recipe.component';
 import { EnvServiceProvider } from './env.service.provider';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { EnvServiceProvider } from './env.service.provider';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgbModule
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.

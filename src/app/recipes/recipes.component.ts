@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { RecipePreview } from './recipe-preview';
 
-
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
@@ -10,11 +9,20 @@ import { RecipePreview } from './recipe-preview';
 })
 
 export class RecipesComponent implements OnInit {
-  recipes: RecipePreview[] = [];
   searchWords: string = "";
+  recipes: RecipePreview[] = [];
+  total: number = 0;
+  pageSize: number = 2;
+  page: number = 1;
+  previousPage = 0;
 
   getRecipes(searchWords: string): void {
-    this.recipeService.getRecipes(searchWords).subscribe(recipes => this.recipes = recipes);
+    let skip = (this.page-1) * this.pageSize;
+    this.recipeService.getRecipes(searchWords, skip, this.pageSize).subscribe(paginatedRecipe => {
+      this.recipes = paginatedRecipe.recipes;
+      this.total = paginatedRecipe.total;
+    });
+
   }
 
   constructor(private recipeService: RecipeService) { }
@@ -30,5 +38,12 @@ export class RecipesComponent implements OnInit {
         this.getRecipes(this.searchWords);
       }
     }, 1000);
+  }
+
+  loadPage(page: number) {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.getRecipes(this.searchWords);
+    }
   }
 }
