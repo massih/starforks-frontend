@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { RECIPES } from './mock-recipes';
 import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
 import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
+import { RecipePreview } from './recipes/recipe-preview';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeService {
-  private backendUrl: string;  // URL to web api
+  private backendUrl: string;
   headers = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -31,13 +31,13 @@ export class RecipeService {
       );
   }
 
-  getRecipes(searchWords: string): Observable<RecipeDetails[]> {
+  getRecipes(searchWords: string): Observable<RecipePreview[]> {
     return this.http
-      .get<RecipeDetails[]>(this.backendUrl + "/", {
+      .get<RecipePreview[]>(this.backendUrl + "/", {
         params: new HttpParams().set('searchWords', searchWords)
     })
       .pipe(
-        catchError(this.handleError<RecipeDetails[]>('getRecipes', []))
+        catchError(this.handleError<RecipePreview[]>('getRecipes', []))
       );
   }
 

@@ -19,7 +19,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{recipe.name}}</h5>
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                    Type: {{recipe.type}} </p>
+                    Type: {{recipe.type}}
+                    Picture: {{recipe.picture}} </p>
+                <!-- <button type="submit" (click)="openRecipe()" class="btn btn-primary">Read more</button> -->
                 <a routerLink="/detail/{{recipe.id}}" class="btn btn-primary">Read more</a>
             </div>
         </div>
