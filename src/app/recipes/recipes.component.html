@@ -27,3 +27,6 @@
         </div>
     </div>
 </div>
+<div class="row m-3">
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="total" [(page)]="page" [pageSize]="pageSize" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+</div>

@@ -6,6 +6,7 @@ import { catchError, } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
 import { RecipePreview } from './recipes/recipe-preview';
+import { PaginatedRecipe } from './recipes/paginated-recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +34,16 @@ export class RecipeService {
       );
   }
 
-  getRecipes(searchWords: string): Observable<RecipePreview[]> {
+  getRecipes(searchWords: string, skip: number, limit: number): Observable<PaginatedRecipe> {
     return this.http
-      .get<RecipePreview[]>(this.backendUrl + "/", {
-        params: new HttpParams().set('searchWords', searchWords)
+      .get<PaginatedRecipe>(this.backendUrl + "/", {
+        params: new HttpParams()
+        .set('searchWords', searchWords)
+        .set('skip', skip)
+        .set('limit', limit)
     })
       .pipe(
-        catchError(this.handleError<RecipePreview[]>('getRecipes', []))
+        catchError(this.handleError<PaginatedRecipe>('getRecipes', undefined))
       );
   }
 
