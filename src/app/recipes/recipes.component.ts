@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
-import { RecipeDetails } from '../recipe-detail/recipe-details';
+import { RecipePreview } from './recipe-preview';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { RecipeDetails } from '../recipe-detail/recipe-details';
 })
 
 export class RecipesComponent implements OnInit {
-  recipes: RecipeDetails[] = [];
+  recipes: RecipePreview[] = [];
   searchWords: string = "";
 
   getRecipes(searchWords: string): void {
