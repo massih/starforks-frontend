@@ -18,7 +18,7 @@ export class RecipeService {
     })
   }; //TODO use this but not for save recipe
 
-  saveRecipe(recipe: NewRecipe, file: File): Observable<string | HttpEvent<any>> {
+  saveRecipe(recipe: NewRecipe, file: File): Observable<any> {
     let formData = new FormData();
     formData.append('data', new Blob([JSON.stringify(recipe)], {
       type: "application/json"
