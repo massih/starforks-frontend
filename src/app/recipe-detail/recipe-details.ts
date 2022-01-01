@@ -3,10 +3,10 @@ import { RecipeType } from "../enums/recipeTypeEnum";
 export interface RecipeDetails {
     id: number;
     name: string;
-    ingredients: string; //change to proper object
-    steps: string; //change to proper object
+    ingredients: string; 
+    steps: string;
     author: string;
     createdAt: string;
-    picture: string; // what is this one?
+    picture: string;
     type: RecipeType;
 }

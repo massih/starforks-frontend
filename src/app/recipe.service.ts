@@ -5,8 +5,7 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpParams} from '@angular/common/ht
 import { catchError, map, tap } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
-import { RecipePreview } from './recipes/recipe-preview';
-import { PaginatedRecipe } from './recipes/paginated-recipe';
+import { PaginatedRecipes } from './recipes/paginated-recipe';
 
 @Injectable({
   providedIn: 'root'
@@ -32,16 +31,16 @@ export class RecipeService {
       );
   }
 
-  getRecipes(searchWords: string, skip: number, limit: number): Observable<PaginatedRecipe> {
+  getRecipes(searchWords: string, skip: number, limit: number): Observable<PaginatedRecipes> {
     return this.http
-      .get<PaginatedRecipe>(this.backendUrl + "/", {
+      .get<PaginatedRecipes>(this.backendUrl + "/", {
         params: new HttpParams()
         .set('searchWords', searchWords)
         .set('skip', skip)
         .set('limit', limit)
     })
       .pipe(
-        catchError(this.handleError<PaginatedRecipe>('getRecipes', undefined))
+        catchError(this.handleError<PaginatedRecipes>('getRecipes', undefined))
       );
   }
 
