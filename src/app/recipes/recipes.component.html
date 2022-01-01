@@ -9,30 +9,26 @@
         </form>
     </div>
 </div>
-<div class="row mx-3">
-    <div>
-        <h5 style="display: flex; justify-content: center; align-items: center; text-align: center;"
-            *ngIf="recipes.length === 0">No recipes found!</h5>
+<div class="row mx-3" *ngIf="!loading">
+    <div *ngIf="recipes.length === 0">
+        <h5 style="display: flex; justify-content: center; align-items: center; text-align: center;">
+            No recipes found!</h5>
     </div>
     <div class="col-md-3" *ngFor="let recipe of recipes">
         <div class="card shadow">
             <div class="card-body">
                 <h5 class="card-title">{{recipe.name}}</h5>
-<<<<<<< HEAD
                 <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                    Type: {{recipe.type}}
-                    Picture: {{recipe.picture}} </p>
-                <!-- <button type="submit" (click)="openRecipe()" class="btn btn-primary">Read more</button> -->
-=======
-                    <img class="card-img-top" [src]=recipe.picture alt="" />
-                    <p class="card-text">
-                        Type: {{recipe.type}} </p>
->>>>>>> 76d0e60 (Fix merge issue)
+                    Type: {{recipe.type}}</p>
+                <img class="card-img-top" [src]=recipe.picture alt="" />
+                <p class="card-text">
+                    Type: {{recipe.type}} </p>
                 <a routerLink="/detail/{{recipe.id}}" class="btn btn-primary">Read more</a>
             </div>
         </div>
     </div>
 </div>
 <div class="row m-3">
-    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="total" [(page)]="page" [pageSize]="pageSize" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="total" [(page)]="page" [pageSize]="pageSize"
+        [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
 </div>
