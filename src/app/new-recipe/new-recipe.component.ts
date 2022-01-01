@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { RecipeType } from '../enums/recipeTypeEnum';
 import { NewRecipe } from '../new-recipe/new-recipe';
@@ -13,7 +14,7 @@ export class NewRecipeComponent implements OnInit {
   recipeTypes = RecipeType;
   recipeTypeNumbers: number[] = [];
   file: File | undefined;
-
+  progress: number = -1;
   emptyRecipe = (): NewRecipe => ({ author: "", ingredients: "", name: "", steps: "", type: RecipeType.Starter });
 
   @Input()
@@ -29,8 +30,21 @@ export class NewRecipeComponent implements OnInit {
 
   submit(): void {
     if (this.file) {
-      console.log(this.newRecipe)
-      this.recipeService.saveRecipe(this.newRecipe, this.file).subscribe(events => console.log(events))
+      this.recipeService.saveRecipe(this.newRecipe, this.file)
+        .subscribe((event: HttpEvent<any>) => {
+          switch (event.type) {
+            case HttpEventType.Sent:
+              this.progress = 0;
+              break;
+            case HttpEventType.UploadProgress:
+              this.progress = Math.round(event.loaded / event.total! * 100);
+              break;
+            case HttpEventType.Response:
+              setTimeout(() => {
+                this.progress = -1;
+              }, 1500);
+          }
+        })
     } // TODO make it save even without picture
   }
 
