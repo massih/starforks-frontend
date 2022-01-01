@@ -10,7 +10,8 @@
 
                     <div class="mb-3">
                         <label class="form-label" for="recipe-name">Recipe name:</label>
-                        <input type="text" class="form-control" [(ngModel)]="newRecipe.name" id="recipe-name" name="recipe-name" required>
+                        <input type="text" class="form-control" [(ngModel)]="newRecipe.name" id="recipe-name"
+                            name="recipe-name" required>
                     </div>
 
                     <div class="mb-3">
@@ -47,11 +48,17 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                  <div class="row justify-content-md-center">
-                    <div class="col-md-auto">
-                      <button type="submit" (click)="submit()" class="btn btn-primary">Into the cookbook!</button>
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-auto">
+                            <button type="submit" (click)="submit()" class="btn btn-primary">Into the cookbook!</button>
+                        </div>
                     </div>
-                  </div>
+                    <div class="row my-3" *ngIf="progress > 0">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" [style.width.%]="progress"></div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>
