@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { NewRecipe } from './new-recipe/new-recipe';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams, HttpEvent } from '@angular/common/http';
-import { catchError, } from 'rxjs/operators';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 import { EnvService } from './env.service';
 import { RecipeDetails } from './recipe-detail/recipe-details';
 import { PaginatedRecipes } from './recipes/paginated-recipe';
