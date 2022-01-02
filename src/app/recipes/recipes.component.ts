@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeService } from '../recipe.service';
 import { RecipePreview } from './recipe-preview';
-import { PaginatedRecipes } from './paginated-recipe';
 import { DomSanitizer } from "@angular/platform-browser";
-import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-recipes',
